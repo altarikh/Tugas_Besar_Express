@@ -6,11 +6,13 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
+app.use(express.static('publics'));
 
 //Routes
 const homeRouter = require('./routes/home');
 const productRouter = require('./routes/product');
 const penerbitRouter = require('./routes/penerbit');
+const bukuRouter = require('./routes/buku');
 
 const sequelize = require('./configs/sequelize');
 
@@ -34,6 +36,7 @@ Buku.belongsTo(SpesifikasiProduk);
 
 app.use(homeRouter);
 app.use('/product', productRouter);
+app.use('/buku', bukuRouter);
 app.use('/penerbit', penerbitRouter);
 
 app.listen(3000, () => {
