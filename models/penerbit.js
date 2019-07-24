@@ -6,9 +6,7 @@ class Penerbit extends Sequelize.Model {}
 
 Penerbit.init({
   nama_penerbit: Sequelize.STRING,
-  alamat: Sequelize.STRING,
-  no_tlp: Sequelize.STRING,
-  tahun_penerbit: Sequelize.DATEONLY
+  alamat: Sequelize.STRING
 }, { sequelize, modelName: 'penerbit' });
 
 module.exports = Penerbit;

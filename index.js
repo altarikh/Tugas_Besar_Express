@@ -11,23 +11,30 @@ app.use(express.static('publics'));
 //Routes
 const homeRouter = require('./routes/home');
 const penerbitRouter = require('./routes/penerbit');
+const pengarangRouter = require('./routes/pengarang');
+const kategoriRouter = require('./routes/kategori');
 const bukuRouter = require('./routes/buku');
 const userRouter = require('./routes/user');
 const sequelize = require('./configs/sequelize');
+const keranjangRouter = require('./routes/keranjang')
 
 //Models
 const Buku = require('./models/buku');
 const Penerbit = require('./models/penerbit');
 const Pengarang = require('./models/pengarang');
-const SpesifikasiProduk = require('./models/spesifikasi_produk');
-const Kategori = require('./models/kategori')
+const Kategori = require('./models/kategori');
+const User = require('./models/user');
+const Keranjang = require('./models/keranjang');
 
 //Relasi
-Buku.hasMany(Kategori);
-Kategori.belongsTo(Buku);
+Buku.hasMany(Keranjang);
+Keranjang.belongsTo(Buku);
 
+User.hasMany(Keranjang);
+Keranjang.belongsTo(User);
 
-// Keranjang.belongsTo(Buku);
+Kategori.hasMany(Buku);
+Buku.belongsTo(Kategori);
 
 Penerbit.hasMany(Buku);
 Buku.belongsTo(Penerbit);
@@ -35,14 +42,15 @@ Buku.belongsTo(Penerbit);
 Pengarang.hasOne(Buku);
 Buku.belongsTo(Pengarang);
 
-SpesifikasiProduk.hasOne(Buku);
-Buku.belongsTo(SpesifikasiProduk);
 
 
 app.use('/home', homeRouter);
-
+app.use('/pengarang', pengarangRouter);
 app.use('/buku', bukuRouter);
+app.use('/kategori', kategoriRouter);
 app.use('/penerbit', penerbitRouter);
+app.use('/keranjang', keranjangRouter);
+app.use('/user', userRouter);
 
 app.listen(3000, () => {
     console.log('server started');

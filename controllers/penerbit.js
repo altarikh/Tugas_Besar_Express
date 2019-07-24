@@ -1,6 +1,12 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const Penerbit = require('../models/penerbit');
 
 module.exports.getAllPenerbit = (req, res) => {
+
 	Penerbit.findAll().then((penerbit) =>{
 		res.json(penerbit);
 	}).catch((error) => {
@@ -9,34 +15,63 @@ module.exports.getAllPenerbit = (req, res) => {
 }
 
 module.exports.postPenerbit =(req,res) =>{
-	Penerbit.create({
-		nama_penerbit: req.body.name_penerbit,
-		alamat: req.body.alamat,
-		no_tlp: req.body.no_tlp,
-		tahun_penerbit: req.body.tahun_penerbit
-	}).then((penerbit) => {
-		res.json(penerbit);
-	}).catch((error)=> {
-		throw error;
-	})
+	
+	jwt.verify(req.token, process.env.SECRETKEY, (error,authData)=>{
+				if (error) {
+						res.sendStatus(403);
+				}else{
+					if (authData['role'] == "admin") {
+						Penerbit.create({
+								nama_penerbit: req.body.name_penerbit,
+								alamat: req.body.alamat
+
+						})
+						.then(penerbit => {
+								res.json(penerbit);
+						});
+				}else{
+					res.sendStatus(403);
+				}
+			}
+		})
 }
 module.exports.putPenerbit = (req,res)=>{
-	Penerbit.update({
-		nama_penerbit: req.body.name_penerbit,
-		alamat: req.body.alamat,
-		no_tlp: req.body.no_tlp,
-		tahun_penerbit: req.body.tahun_penerbit
-	}, {where:{id: req.params.id
-	}}).then(() => {
-		res.status(200).send('update Sucess with id '+ id)
+	jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+		if (error) {
+			res.sendStatus(403);
+		} else {
+			if (authData['role']=="admin") {
+				Penerbit.update({
+				nama_penerbit: req.body.name_penerbit,
+				alamat: req.body.alamat
+
+
+				}, {where:{id: req.params.id
+				}}).then((penerbit)=>{
+					res.json(penerbit);
+				});
+			} else {
+				res.status(200).send('update Sucess with id '+ id);
+			}
+		}
 	})
 }
 
 module.exports.deletePenerbit = (req,res) =>{
-	const id = req.params.id;
-	Penerbit.destroy({
-		where:{id : req.params.id}
-	}).then(() => {
-		res.status(200).send('Delete Sucess with id '+ id)
+	jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+		if (error) {
+			res.sendStatus(403);
+		} else {
+			if (authData['role']=="admin") {
+				var id = req.params.id;
+				Penerbit.destroy({
+					where:{id: id}
+				}).then((penerbit)=>{
+					res.json(penerbit);
+				});
+			} else {
+				res.sendStatus(200).send('Delete Sucess with id '+ id);
+			}
+		}
 	})
 }

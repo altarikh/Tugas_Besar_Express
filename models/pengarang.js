@@ -6,8 +6,7 @@ class Pengarang extends Sequelize.Model {}
 
 Pengarang.init({
   nama_pengarang: Sequelize.STRING,
-  alamat: Sequelize.STRING,
-  no_tlp: Sequelize.INTEGER
+  alamat: Sequelize.STRING
 }, { sequelize, modelName: 'pengarang' });
 
 module.exports = Pengarang;
