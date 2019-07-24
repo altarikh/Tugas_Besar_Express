@@ -13,6 +13,13 @@ module.exports.getAllBuku = (req, res) => {
 		throw error;
 	})
 }
+module.exports.getBuku = (req,res) =>{
+	Buku.findByPk(req.params.id).then((buku) => {
+		res.json(buku);
+	}).catch((error) => {
+		throw error;
+	})
+}
 module.exports.postBuku =(req,res) =>{
 		jwt.verify(req.token, process.env.SECRETKEY, (error,authData)=>{
 				if (error) {
