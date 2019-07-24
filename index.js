@@ -52,7 +52,7 @@ app.use('/penerbit', penerbitRouter);
 app.use('/keranjang', keranjangRouter);
 app.use('/user', userRouter);
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('server started');
     sequelize.sync();
 })

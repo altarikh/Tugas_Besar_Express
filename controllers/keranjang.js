@@ -10,7 +10,7 @@ module.exports.postOrderBuku = (req, res) => {
 				if (error) {
 						res.sendStatus(403);
 				}else{
-					if (authData['roles']=="user") {
+					if (authData['roles']== "user") {
 						var bukuId = req.body.bukuId;
 						var jumlah = req.body.jumlah;
 						Keranjang.create({

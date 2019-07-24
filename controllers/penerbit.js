@@ -14,8 +14,7 @@ module.exports.getAllPenerbit = (req, res) => {
 	})
 }
 
-module.exports.postPenerbit =(req,res) =>{
-	
+module.exports.postPenerbit =(req,res) =>{	
 	jwt.verify(req.token, process.env.SECRETKEY, (error,authData)=>{
 				if (error) {
 						res.sendStatus(403);
@@ -30,7 +29,7 @@ module.exports.postPenerbit =(req,res) =>{
 								res.json(penerbit);
 						});
 				}else{
-					res.sendStatus(403);
+					res.json(403);
 				}
 			}
 		})
