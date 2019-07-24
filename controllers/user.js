@@ -16,7 +16,7 @@ module.exports.postRegister = (req,res) =>{
 				username :req.body.username,
 				email :req.body.email,
 				password: hash,
-				role :req.body.role
+				roles :req.body.roles
 			}
 		})
 		.then((user) => {

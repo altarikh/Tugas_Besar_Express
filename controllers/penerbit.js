@@ -20,7 +20,7 @@ module.exports.postPenerbit =(req,res) =>{
 				if (error) {
 						res.sendStatus(403);
 				}else{
-					if (authData['role'] == "admin") {
+					if (authData['roles'] == "admin") {
 						Penerbit.create({
 								nama_penerbit: req.body.name_penerbit,
 								alamat: req.body.alamat
@@ -40,7 +40,7 @@ module.exports.putPenerbit = (req,res)=>{
 		if (error) {
 			res.sendStatus(403);
 		} else {
-			if (authData['role']=="admin") {
+			if (authData['roles']=="admin") {
 				Penerbit.update({
 				nama_penerbit: req.body.name_penerbit,
 				alamat: req.body.alamat
@@ -62,7 +62,7 @@ module.exports.deletePenerbit = (req,res) =>{
 		if (error) {
 			res.sendStatus(403);
 		} else {
-			if (authData['role']=="admin") {
+			if (authData['roles']=="admin") {
 				var id = req.params.id;
 				Penerbit.destroy({
 					where:{id: id}
