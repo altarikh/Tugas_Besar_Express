@@ -6,7 +6,10 @@ class Buku extends Sequelize.Model {}
 
 Buku.init({
   name: Sequelize.STRING,
-  price: Sequelize.INTEGER
+  price: Sequelize.INTEGER,
+  kategoriId :req.body.STRING,
+	penerbitId: req.body.STRING,
+ pengarangId: req.body.STRING
 }, { sequelize, modelName: 'buku' });
 
 module.exports = Buku;
