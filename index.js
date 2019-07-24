@@ -10,14 +10,12 @@ app.use(express.static('publics'));
 
 //Routes
 const homeRouter = require('./routes/home');
-const productRouter = require('./routes/product');
 const penerbitRouter = require('./routes/penerbit');
 const bukuRouter = require('./routes/buku');
 
 const sequelize = require('./configs/sequelize');
 
 //Models
-const Product = require('./models/product');
 const Buku = require('./models/buku');
 const Penerbit = require('./models/penerbit');
 const Pengarang = require('./models/pengarang');
@@ -34,8 +32,8 @@ SpesifikasiProduk.hasOne(Buku);
 Buku.belongsTo(SpesifikasiProduk);
 
 
-app.use(homeRouter);
-app.use('/product', productRouter);
+app.use('/home', homeRouter);
+
 app.use('/buku', bukuRouter);
 app.use('/penerbit', penerbitRouter);
 
