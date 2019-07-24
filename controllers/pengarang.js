@@ -10,7 +10,7 @@ module.exports.getAllPengarang = (req, res) => {
 
 module.exports.postPengarang =(req,res) =>{
 	Pengarang.create({
-		name_pengarang: req.body.name_pengarang,
+		nama_pengarang: req.body.name_pengarang,
 		alamat: req.body.alamat,
 		no_tlp: req.body.no_tlp
 	}).then((pengarang) => {
@@ -21,7 +21,7 @@ module.exports.postPengarang =(req,res) =>{
 }
 module.exports.putPengarang = (req,res)=>{
 	Pengarang.update({
-		name_pengarang: req.body.name_pengarang,
+		nama_pengarang: req.body.name_pengarang,
 		alamat: req.body.alamat,
 		no_tlp: req.body.no_tlp
 	}, {where:{id: req.params.id

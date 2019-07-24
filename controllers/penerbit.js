@@ -10,7 +10,7 @@ module.exports.getAllPenerbit = (req, res) => {
 
 module.exports.postPenerbit =(req,res) =>{
 	Penerbit.create({
-		name_penerbit: req.body.name_penerbit,
+		nama_penerbit: req.body.name_penerbit,
 		alamat: req.body.alamat,
 		no_tlp: req.body.no_tlp,
 		tahun_penerbit: req.body.tahun_penerbit
@@ -22,7 +22,7 @@ module.exports.postPenerbit =(req,res) =>{
 }
 module.exports.putPenerbit = (req,res)=>{
 	Penerbit.update({
-		name_penerbit: req.body.name_penerbit,
+		nama_penerbit: req.body.name_penerbit,
 		alamat: req.body.alamat,
 		no_tlp: req.body.no_tlp,
 		tahun_penerbit: req.body.tahun_penerbit
